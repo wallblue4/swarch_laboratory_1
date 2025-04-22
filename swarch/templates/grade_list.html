@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <form action="/add" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="student_name" class="form-label">Nombre del estudiante:</label>
+            <input type="text" 
+                   name="student_name" 
+                   id="student_name"
+                   class="form-control" 
+                   placeholder="Nombre del estudiante" 
+                   required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="subject" class="form-label">Asignatura:</label>
+            <input type="text" 
+                   name="subject" 
+                   id="subject"
+                   class="form-control" 
+                   placeholder="Asignatura" 
+                   required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="score" class="form-label">Calificación:</label>
+            <input type="number" 
+                   name="score" 
+                   id="score"
+                   class="form-control" 
+                   placeholder="Calificación" 
+                   step="0.1" 
+                   min="0" 
+                   max="10" 
+                   required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Agregar</button>
+    </form>
+
+    <div class="mt-4">
+        <h3>Lista de Calificaciones</h3>
+        <ul class="list-group">
+            {% for grade in grades %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ grade.student_name }} - {{ grade.subject }}: {{ grade.score }}
+                <a href="/delete/{{ grade.id }}" class="btn btn-danger btn-sm">Eliminar</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
